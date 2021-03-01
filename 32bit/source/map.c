@@ -3,8 +3,8 @@
 SDL_bool initMap(Map *map)
 {
 	SDL_bool noError = SDL_TRUE;
-	map->width = 12;
-	map->height = 9;
+	map->width = 25;
+	map->height = 18;
 
 	map->tile = malloc(sizeof(Tile) * map->height);
 	if(map->tile == NULL)
@@ -27,7 +27,7 @@ SDL_bool initMap(Map *map)
 	{
 		for(int x = 0; x < map->width; x++)
 		{
-			SDL_Rect r = {x * 64, y * 64, 64, 64};
+			SDL_Rect r = {x * 32, y * 32, 32, 32};
 
 			map->tile[y][x].dimension = r;
 			map->tile[y][x].color.r = 255;

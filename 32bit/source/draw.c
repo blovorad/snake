@@ -1,6 +1,6 @@
 #include "draw.h"
 
-SDL_bool draw(SDL_Renderer *renderer, Map map)
+SDL_bool draw(SDL_Renderer *renderer, const Map map, const Snake snake, SDL_Texture *texture[])
 {
 	if(!setColor(renderer, 0, 0, 0, 0))
 	{
@@ -11,14 +11,16 @@ SDL_bool draw(SDL_Renderer *renderer, Map map)
 	{
 		return SDL_FALSE;
 	}
-	SDL_Rect r = {200, 200, 50, 50};
-	SDL_Rect r2 = {400, 400, 50, 50};
 
 	if(!drawMap(renderer, map))
 	{
 		return SDL_FALSE;
 	}
 
+	if(!drawSnake(renderer, snake, texture))
+	{
+		return SDL_FALSE;
+	}
 
 	SDL_RenderPresent(renderer);
 
@@ -137,7 +139,7 @@ SDL_bool drawPointWithColor(SDL_Renderer *renderer, const int x, const int y, co
 	return SDL_TRUE;
 }
 
-SDL_bool drawMap(SDL_Renderer *renderer, Map map)
+SDL_bool drawMap(SDL_Renderer *renderer, const Map map)
 {
 
 	for(int y = 0; y < map.height; y++)
@@ -148,6 +150,19 @@ SDL_bool drawMap(SDL_Renderer *renderer, Map map)
 			{
 				return SDL_FALSE;
 			}
+		}
+	}
+
+	return SDL_TRUE;
+}
+
+SDL_bool drawSnake(SDL_Renderer *renderer, const Snake snake, SDL_Texture *texture[])
+{
+	for(int i = 0; i < snake.nbElement; i++)
+	{
+		if(SDL_RenderCopyEx(renderer, getTexture(snake.body[i].texture, texture), NULL, &snake.body[i].dimension, snake.body[i].angle, snake.body[i].center, snake.body[i].flip) < 0)
+		{
+			return SDL_FALSE;
 		}
 	}
 

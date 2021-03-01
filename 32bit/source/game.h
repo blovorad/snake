@@ -6,8 +6,10 @@
 #include "update.h"
 #include "draw.h"
 #include "map.h"
+#include "snake.h"
+#include "texture.h"
 
 void launchGame(void);
-void cleanGame(SDL_Window **window, SDL_Renderer **renderer, Map *map);
+void cleanGame(SDL_Window **window, SDL_Renderer **renderer, Map *map, SDL_Texture *texture[]);
 
 #endif

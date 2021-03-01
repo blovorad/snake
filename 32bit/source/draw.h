@@ -3,9 +3,12 @@
 
 #include "core.h"
 #include "map.h"
+#include "snake.h"
+#include "texture.h"
 
-SDL_bool draw(SDL_Renderer *renderer, Map map);
-SDL_bool drawMap(SDL_Renderer *renderer, Map map);
+SDL_bool draw(SDL_Renderer *renderer, const Map map, const Snake snake, SDL_Texture *texture[]);
+SDL_bool drawMap(SDL_Renderer *renderer, const Map map);
+SDL_bool drawSnake(SDL_Renderer *renderer, const Snake snake, SDL_Texture *texture[]);
 SDL_bool setColor(SDL_Renderer *renderer, const Uint8 r, const Uint8 g, const Uint8 b, const Uint8 a);
 SDL_bool drawLine(SDL_Renderer *renderer, const int x1, const int y1, const int x2, const int y2);
 SDL_bool drawLineWithColor(SDL_Renderer *renderer, const int x1, const int y1, const int x2, const int y2, const Uint8 r, const Uint8 g, const Uint8 b, const Uint8 a);

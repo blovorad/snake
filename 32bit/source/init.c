@@ -1,6 +1,6 @@
 #include "init.h"
 
-SDL_bool init(Uint32 flag, SDL_BlendMode blendMode, SDL_Window **window, SDL_Renderer **renderer, Input *input, Map *map)
+SDL_bool init(Uint32 flag, SDL_BlendMode blendMode, SDL_Window **window, SDL_Renderer **renderer, Input *input, Map *map, Snake *snake, SDL_Texture *texture[])
 {
 	if(SDL_Init(flag) < 0)
 	{
@@ -19,6 +19,11 @@ SDL_bool init(Uint32 flag, SDL_BlendMode blendMode, SDL_Window **window, SDL_Ren
 		return SDL_FALSE;
 	}
 
+	if(IMG_Init(IMG_INIT_PNG) == 0)
+	{
+		return SDL_FALSE;
+	}
+
 	if(SDL_SetRenderDrawBlendMode(*renderer, blendMode) < 0)
 	{
 		return SDL_FALSE;
@@ -28,7 +33,11 @@ SDL_bool init(Uint32 flag, SDL_BlendMode blendMode, SDL_Window **window, SDL_Ren
 	{
 		return SDL_FALSE;
 	}
-
+	if(!initTexture(*renderer, texture))
+	{
+		return SDL_FALSE;
+	}
+	initSnake(snake);
 	initInput(input);
 
 	return SDL_TRUE;
